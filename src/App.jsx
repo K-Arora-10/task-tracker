@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import Login from './components/Login';
+import AddTaskForm from './components/AddTaskForm';
+import TaskList from './components/TaskList';
+import TaskFilter from './components/TaskFilter';
+import ThemeToggle from './components/ThemeToggle';
+import './styles/App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem('tasks');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [filter, setFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  const filtered = tasks.filter((task) => {
+    const matchesStatus =
+      filter === 'all' ||
+      (filter === 'completed' && task.completed) ||
+      (filter === 'pending' && !task.completed);
+    const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesStatus && matchesSearch;
+  });
+
+  if (!username) {
+    return <Login setUsername={setUsername} />;
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      <header>
+        <h2>{username}'s Task Tracker</h2>
+        <button onClick={() => {
+          localStorage.removeItem('username');
+          setUsername('');
+        }}>Logout</button>
+        <ThemeToggle />
+      </header>
+      <AddTaskForm tasks={tasks} setTasks={setTasks} />
+      <TaskFilter
+        filter={filter}
+        setFilter={setFilter}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        tasks={tasks}
+      />
+      <TaskList tasks={filtered} setTasks={setTasks} />
+    </div>
+  );
 }
 
-export default App
+export default App;
