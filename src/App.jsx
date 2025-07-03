@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
-import AddTaskForm from './components/AddTaskForm';
+import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import TaskFilter from './components/TaskFilter';
 import ThemeToggle from './components/ThemeToggle';
@@ -42,7 +42,7 @@ function App() {
         }}>Logout</button>
         <ThemeToggle />
       </header>
-      <AddTaskForm tasks={tasks} setTasks={setTasks} />
+      <AddTask tasks={tasks} setTasks={setTasks} />
       <TaskFilter
         filter={filter}
         setFilter={setFilter}
