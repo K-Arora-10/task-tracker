@@ -1,4 +1,4 @@
-// src/components/AddTask.js
+
 import React, { useState } from 'react';
 
 function AddTask({ tasks, setTasks }) {
@@ -16,8 +16,7 @@ function AddTask({ tasks, setTasks }) {
       id: Date.now(),
       title: title.trim(),
       description: description.trim(),
-      completed: false,
-      createdAt: new Date().toISOString(),
+      completed: false,      createdAt: new Date().toISOString(),
       dueDate,
       priority,
       tags: tags
