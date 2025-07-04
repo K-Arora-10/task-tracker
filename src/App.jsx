@@ -9,15 +9,18 @@ import './styles/App.css';
 function App() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
   const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem('tasks');
+    const saved = localStorage.getItem(`tasks-${localStorage.getItem('username')}`);
     return saved ? JSON.parse(saved) : [];
-  });
+  },[username]);
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+  if (username) {
+    localStorage.setItem(`tasks-${username}`, JSON.stringify(tasks));
+  }
+}, [tasks, username]);
+
 
   const filtered = tasks.filter((task) => {
     const matchesStatus =
@@ -39,6 +42,7 @@ function App() {
         <button onClick={() => {
           localStorage.removeItem('username');
           setUsername('');
+          setTasks([])
         }}>Logout</button>
         <ThemeToggle />
       </header>
