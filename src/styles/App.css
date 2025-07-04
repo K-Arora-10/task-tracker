@@ -80,8 +80,8 @@ form h3 {
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 6px;
-  width: 40%;
-  margin-right: 5%;
+  /* width: 40%; */
+  /* margin-right: 5%; */
 }
 
 .task-card.completed {
@@ -138,5 +138,7 @@ form h3 {
 }
 
 .task-list{
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
 }
