@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddTask({ tasks, setTasks }) {
+function TaskForm({ tasks, setTasks }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -81,4 +81,4 @@ function AddTask({ tasks, setTasks }) {
   );
 }
 
-export default AddTask;
+export default TaskForm;

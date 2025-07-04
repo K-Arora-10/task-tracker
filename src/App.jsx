@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
-import AddTask from './components/AddTask';
+import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import TaskFilter from './components/TaskFilter';
 import ThemeToggle from './components/ThemeToggle';
@@ -49,7 +49,9 @@ function App() {
   };
 
   if (!username) {
-    return <Login setUsername={setUsername} />;
+    return <>
+      <Login setUsername={setUsername} />
+    </>;
   }
 
   return (
@@ -62,7 +64,7 @@ function App() {
         </div>
       </header>
 
-      <AddTask tasks={tasks} setTasks={setTasks} />
+      <TaskForm tasks={tasks} setTasks={setTasks} />
 
       <TaskFilter
         filter={filter}
