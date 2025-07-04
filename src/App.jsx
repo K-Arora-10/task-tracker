@@ -5,6 +5,7 @@ import TaskList from './components/TaskList';
 import TaskFilter from './components/TaskFilter';
 import ThemeToggle from './components/ThemeToggle';
 import './styles/App.css';
+import { loadTasks, saveTasks } from './utils/localStorage';
 
 function App() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
@@ -14,8 +15,7 @@ function App() {
 
   useEffect(() => {
     if (username) {
-      const saved = localStorage.getItem(`tasks-${username}`);
-      setTasks(saved ? JSON.parse(saved) : []);
+      setTasks(loadTasks(username));
     } else {
       setTasks([]);
     }
@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     if (username) {
-      localStorage.setItem(`tasks-${username}`, JSON.stringify(tasks));
+      saveTasks(username,tasks);
     }
   }, [tasks, username]);
 
