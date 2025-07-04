@@ -27,7 +27,6 @@ function AddTask({ tasks, setTasks }) {
 
     setTasks([newTask, ...tasks]);
 
-    // Clear form fields
     setTitle('');
     setDescription('');
     setDueDate('');

@@ -41,7 +41,7 @@ function App() {
     return matchesFilter && matchesSearch;
   });
 
-  // Logout handler
+
   const handleLogout = () => {
     localStorage.removeItem('username');
     setUsername('');
@@ -56,8 +56,10 @@ function App() {
     <div className="app">
       <header>
         <h2>{username}'s Task Tracker</h2>
-        <button onClick={handleLogout}>Logout</button>
-        <ThemeToggle />
+        <div>
+          <button style={{marginRight: '1rem'}} onClick={handleLogout}>Logout</button>
+          <ThemeToggle />
+        </div>
       </header>
 
       <AddTask tasks={tasks} setTasks={setTasks} />
