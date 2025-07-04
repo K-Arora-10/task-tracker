@@ -8,28 +8,45 @@ import './styles/App.css';
 
 function App() {
   const [username, setUsername] = useState(localStorage.getItem('username') || '');
-  const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem(`tasks-${localStorage.getItem('username')}`);
-    return saved ? JSON.parse(saved) : [];
-  },[username]);
+  const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-  if (username) {
-    localStorage.setItem(`tasks-${username}`, JSON.stringify(tasks));
-  }
-}, [tasks, username]);
+    if (username) {
+      const saved = localStorage.getItem(`tasks-${username}`);
+      setTasks(saved ? JSON.parse(saved) : []);
+    } else {
+      setTasks([]);
+    }
+  }, [username]);
+
+  useEffect(() => {
+    if (username) {
+      localStorage.setItem(`tasks-${username}`, JSON.stringify(tasks));
+    }
+  }, [tasks, username]);
 
 
-  const filtered = tasks.filter((task) => {
-    const matchesStatus =
+  const filteredTasks = tasks.filter(task => {
+    const matchesFilter =
       filter === 'all' ||
       (filter === 'completed' && task.completed) ||
       (filter === 'pending' && !task.completed);
-    const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesStatus && matchesSearch;
+
+    const matchesSearch = task.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    return matchesFilter && matchesSearch;
   });
+
+  // Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    setUsername('');
+    setTasks([]);
+  };
 
   if (!username) {
     return <Login setUsername={setUsername} />;
@@ -39,14 +56,12 @@ function App() {
     <div className="app">
       <header>
         <h2>{username}'s Task Tracker</h2>
-        <button onClick={() => {
-          localStorage.removeItem('username');
-          setUsername('');
-          setTasks([])
-        }}>Logout</button>
+        <button onClick={handleLogout}>Logout</button>
         <ThemeToggle />
       </header>
+
       <AddTask tasks={tasks} setTasks={setTasks} />
+
       <TaskFilter
         filter={filter}
         setFilter={setFilter}
@@ -54,7 +69,8 @@ function App() {
         setSearchQuery={setSearchQuery}
         tasks={tasks}
       />
-      <TaskList tasks={filtered} setTasks={setTasks} />
+
+      <TaskList tasks={filteredTasks} setTasks={setTasks} />
     </div>
   );
 }
