@@ -14,11 +14,11 @@ function Login({ setUsername }) {
     <div style={{ marginTop: '100px', textAlign: 'center' }}>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input
+        <input style={{width:'auto',textAlign:'center'}}
           placeholder="Enter your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-        />
+        /><br/>
         <button type="submit">Continue</button>
       </form>
     </div>
