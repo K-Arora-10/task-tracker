@@ -7,7 +7,7 @@ function TaskList({ tasks, setTasks }) {
   }
 
   return (
-    <div>
+    <div className='task-list'>
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} setTasks={setTasks} />
       ))}

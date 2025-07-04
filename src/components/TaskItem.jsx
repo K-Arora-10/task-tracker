@@ -35,14 +35,8 @@ function TaskItem({ task, setTasks }) {
   };
 
   return (
-    <div
-      style={{
-        border: '1px solid #ccc',
-        padding: '1rem',
-        marginBottom: '1rem',
-        background: task.completed ? '#e0ffe0' : '#fff8dc'
-      }}
-    >
+    <div className={`task-card ${task.completed ? 'completed' : ''}`}>
+
       {isEditing ? (
         <>
           <input
@@ -62,13 +56,16 @@ function TaskItem({ task, setTasks }) {
           {task.description && <p>{task.description}</p>}
           <p>Created: {new Date(task.createdAt).toLocaleString()}</p>
           {task.dueDate && <p>Due: {task.dueDate}</p>}
-          <p>Priority: {task.priority}</p>
+          <span className={`priority ${task.priority}`}>
+          {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)} Priority
+          </span>
+
           {task.tags.length > 0 && (
             <p>Tags: {task.tags.join(', ')}</p>
           )}
-          <div style={{ marginTop: '0.5rem' }}>
+          <div className="actions">
             <button onClick={toggleComplete}>
-              {task.completed ? 'Mark as Pending' : 'Mark as Completed'}
+                {task.completed ? 'Mark as Pending' : 'Mark as Completed'}
             </button>
             <button onClick={() => setIsEditing(true)}>Edit</button>
             <button onClick={deleteTask}>Delete</button>
