@@ -1,12 +1,11 @@
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function AddTask({ tasks, setTasks }) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [priority, setPriority] = useState('medium');
-  const [tags, setTags] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [priority, setPriority] = useState("medium");
+  const [tags, setTags] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,22 +15,23 @@ function AddTask({ tasks, setTasks }) {
       id: Date.now(),
       title: title.trim(),
       description: description.trim(),
-      completed: false,      createdAt: new Date().toISOString(),
+      completed: false,
+      createdAt: new Date().toISOString(),
       dueDate,
       priority,
       tags: tags
-        .split(',')
-        .map(tag => tag.trim())
-        .filter(Boolean)
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter(Boolean),
     };
 
     setTasks([newTask, ...tasks]);
 
-    setTitle('');
-    setDescription('');
-    setDueDate('');
-    setPriority('medium');
-    setTags('');
+    setTitle("");
+    setDescription("");
+    setDueDate("");
+    setPriority("medium");
+    setTags("");
   };
 
   return (
@@ -53,15 +53,17 @@ function AddTask({ tasks, setTasks }) {
       />
 
       <input
-        type="date"
+        type="text"
+        placeholder="Select due date"
         value={dueDate}
+        onFocus={(e) => (e.target.type = "date")}
+        onBlur={(e) => {
+          if (!e.target.value) e.target.type = "text";
+        }}
         onChange={(e) => setDueDate(e.target.value)}
       />
 
-      <select
-        value={priority}
-        onChange={(e) => setPriority(e.target.value)}
-      >
+      <select value={priority} onChange={(e) => setPriority(e.target.value)}>
         <option value="low">Low priority</option>
         <option value="medium">Medium priority</option>
         <option value="high">High priority</option>
