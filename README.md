@@ -4,16 +4,16 @@
 
 ## ✨ Features
 
-- Login with a username (stored in browser)
+- Login with a username
 - Add, edit, delete tasks
 - Edit title, description, due date, priority, and tags
 - Mark tasks as completed or pending
 - Search tasks by title
 - Priority levels: Low / Medium / High (with color labels)
-- Add multiple tags (comma-separated)
+- Add multiple tags
 - Filter tasks: All / Completed / Pending
 - Dark and light mode toggle
-- Fully responsive layout (2-column on wide screens, 1-column on mobile)
+- Fully responsive layout
 - Tasks saved per user using browser `localStorage`
 
 ## 🚀 Live Demo
@@ -40,24 +40,6 @@
 - Vite (Build tool)
 - CSS (custom styling, no frameworks)
 - LocalStorage API (for client-side persistence)
-
-## 📁 Folder Structure
-
-src/
-├── components/
-│ ├── Login.js
-│ ├── AddTask.js
-│ ├── TaskItem.js
-│ ├── TaskList.js
-│ ├── TaskFilter.js
-│ └── ThemeToggle.js
-├── styles/
-│ └── App.css
-├── utils/
-│ └── localStorage.js
-├── App.js
-└── main.jsx
-
 
 ## 🧩 Getting Started
 
