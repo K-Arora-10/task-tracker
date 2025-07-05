@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import Login from './components/Login';
-import TaskForm from './components/TaskForm';
-import TaskList from './components/TaskList';
-import TaskFilter from './components/TaskFilter';
-import ThemeToggle from './components/ThemeToggle';
-import './styles/App.css';
-import { loadTasks, saveTasks } from './utils/localStorage';
+import React, { useState, useEffect } from "react";
+import Login from "./components/Login";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
+import TaskFilter from "./components/TaskFilter";
+import ThemeToggle from "./components/ThemeToggle";
+import "./styles/App.css";
+import { loadTasks, saveTasks } from "./utils/localStorage";
 
 function App() {
-  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+  const [username, setUsername] = useState(
+    localStorage.getItem("username") || ""
+  );
   const [tasks, setTasks] = useState([]);
-  const [filter, setFilter] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [filter, setFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (username) {
@@ -23,16 +25,15 @@ function App() {
 
   useEffect(() => {
     if (username) {
-      saveTasks(username,tasks);
+      saveTasks(username, tasks);
     }
   }, [tasks, username]);
 
-
-  const filteredTasks = tasks.filter(task => {
+  const filteredTasks = tasks.filter((task) => {
     const matchesFilter =
-      filter === 'all' ||
-      (filter === 'completed' && task.completed) ||
-      (filter === 'pending' && !task.completed);
+      filter === "all" ||
+      (filter === "completed" && task.completed) ||
+      (filter === "pending" && !task.completed);
 
     const matchesSearch = task.title
       .toLowerCase()
@@ -41,17 +42,18 @@ function App() {
     return matchesFilter && matchesSearch;
   });
 
-
   const handleLogout = () => {
-    localStorage.removeItem('username');
-    setUsername('');
+    localStorage.removeItem("username");
+    setUsername("");
     setTasks([]);
   };
 
   if (!username) {
-    return <>
-      <Login setUsername={setUsername} />
-    </>;
+    return (
+      <>
+        <Login setUsername={setUsername} />
+      </>
+    );
   }
 
   return (
@@ -59,12 +61,16 @@ function App() {
       <header>
         <h2>{username}'s Task Tracker</h2>
         <div>
-          <button style={{marginRight: '1rem'}} onClick={handleLogout}>Logout</button>
+          <button style={{ marginRight: "1rem" }} onClick={handleLogout}>
+            Logout
+          </button>
           <ThemeToggle />
         </div>
       </header>
 
       <TaskForm tasks={tasks} setTasks={setTasks} />
+
+      <hr style={{marginTop:"2rem"}} />
 
       <TaskFilter
         filter={filter}

@@ -13,7 +13,9 @@ function Login({ setUsername }) {
 
   return (
     <>
-      <div style={{position: "absolute", top: "20px", right: "20px"}}><ThemeToggle/></div>
+      <div style={{ position: "absolute", top: "20px", right: "20px" }}>
+        <ThemeToggle />
+      </div>
       <div style={{ marginTop: "100px", textAlign: "center" }}>
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>

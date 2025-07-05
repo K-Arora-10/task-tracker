@@ -1,4 +1,3 @@
-
 :root {
   --bg: #f9f9f9;
   --text: #222;
@@ -20,7 +19,7 @@ body.dark {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   background-color: var(--bg);
   color: var(--text);
 }
@@ -40,10 +39,12 @@ header {
   gap: 1rem;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   width: 100%;
   padding: 0.6rem;
-  margin: 0.4rem 0 1rem;
+  margin: 0.4rem 0 0.4rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
@@ -79,7 +80,6 @@ form h3 {
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 6px;
-
 }
 
 .task-card.completed {
@@ -136,13 +136,11 @@ form h3 {
   background-color: #e74c3c; /* Red */
 }
 
-.task-list{
+.task-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1rem;
 }
-
-
 
 /* ------------------- */
 
@@ -150,7 +148,8 @@ body,
 input,
 button,
 .task-card {
-  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease,
+    border-color 0.3s ease;
 }
 
 button:hover {
@@ -158,8 +157,6 @@ button:hover {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
-
 
 @keyframes fadeInSlide {
   from {
@@ -175,7 +172,6 @@ button:hover {
 .task-card {
   animation: fadeInSlide 0.3s ease-out;
 }
-
 
 body {
   transition: background-color 0.4s ease, color 0.4s ease;

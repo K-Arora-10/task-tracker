@@ -1,5 +1,5 @@
-import React from 'react';
-import TaskItem from './TaskItem';
+import React from "react";
+import TaskItem from "./TaskItem";
 
 function TaskList({ tasks, setTasks }) {
   if (tasks.length === 0) {
@@ -7,7 +7,7 @@ function TaskList({ tasks, setTasks }) {
   }
 
   return (
-    <div className='task-list'>
+    <div className="task-list">
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} setTasks={setTasks} />
       ))}

@@ -76,7 +76,7 @@ function TaskForm({ tasks, setTasks }) {
         onChange={(e) => setTags(e.target.value)}
       />
 
-      <button type="submit">Add Task</button>
+      <button style={{marginTop:'0.5rem'}} type="submit">Add Task</button>
     </form>
   );
 }
