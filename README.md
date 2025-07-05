@@ -50,4 +50,3 @@ git clone https://github.com/your-username/task-tracker
 cd task-tracker
 npm install
 npm run dev
-npm run build
